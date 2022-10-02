@@ -9,7 +9,7 @@ Sub Margin_Sheet_v6()
     Dim savepath as String
     Set MarginSheet = ActiveWorkbook
     
-    Estimator = "Andrei Polin"
+    Estimator = ""
     
     If MarginSheet.Sheets(1).Range("A1") = "Branch" Then
         MarginSheet.Activate
