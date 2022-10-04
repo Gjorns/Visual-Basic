@@ -4,12 +4,12 @@ Sub Margin_Sheet_v6()
     
     Dim MarginSheet As Workbook
     Dim Estimator As String
-    Dim accountid as String
-    Dim quoteid as String
-    Dim savepath as String
+    Dim accountid As String
+    Dim quoteid As String
+    Dim savepath As String
     Set MarginSheet = ActiveWorkbook
     
-    Estimator = ""
+    Estimator = "Andrei Polin"
     
     If MarginSheet.Sheets(1).Range("A1") = "Branch" Then
         MarginSheet.Activate
@@ -34,7 +34,6 @@ Sub Margin_Sheet_v6()
         MarginSheet.Sheets("Finance Margins").Range("A3").Value = "Sheet Generator:"
         MarginSheet.Sheets("Finance Margins").Range("A4").Value = "Quote ID:"
         MarginSheet.Sheets("Finance Margins").Range("A5").Value = "Date Generated:"
-        MarginSheet.Sheets("Finance Margins").Range("A6").Value = "Use Future Pricing?"
         MarginSheet.Sheets("Finance Margins").Range("F1").Value = "Total Sell:"
         MarginSheet.Sheets("Finance Margins").Range("F2").Value = "Total Cost:"
         MarginSheet.Sheets("Finance Margins").Range("F3").Value = "Basket Margin:"
@@ -137,14 +136,14 @@ Sub Margin_Sheet_v6()
         MarginSheet.Sheets("Finance Margins").Range("E11:E" & LastRowFinanceMargins).Formula = "=@D:D*(1-@I:I)"
         MarginSheet.Sheets("Finance Margins").Range("G11:G" & LastRowFinanceMargins).Formula = "=(@D:D-@M:M)/@D:D"
         MarginSheet.Sheets("Finance Margins").Range("H11:H" & LastRowFinanceMargins).Formula = "=(@E:E-@M:M)/@E:E"
-        MarginSheet.Sheets("Finance Margins").Range("L11:L" & LastRowFinanceMargins).Formula = "=IF($B$6=""NO - (Using Current Pricing)"",@AL:AL,@AM:AM)"
+        MarginSheet.Sheets("Finance Margins").Range("L11:L" & LastRowFinanceMargins).Formula = "=@AL:AL"
         MarginSheet.Sheets("Finance Margins").Range("M11:M" & LastRowFinanceMargins).Formula = "=IF(@AP:AP=""Y"",@L:L,@L:L-@J:J)"
         MarginSheet.Sheets("Finance Margins").Range("N11:N" & LastRowFinanceMargins).Formula = "=@E:E*@F:F"
         MarginSheet.Sheets("Finance Margins").Range("O11:O" & LastRowFinanceMargins).Formula = "=@M:M*@F:F"
         MarginSheet.Sheets("Finance Margins").Range("P11:P" & LastRowFinanceMargins).Formula = "=@N:N-@O:O"
         MarginSheet.Sheets("Finance Margins").Range("R11:R" & LastRowFinanceMargins).Formula = "=@M:M/(1-@Q:Q)"
-        MarginSheet.Sheets("Finance Margins").Range("S11:S" & LastRowFinanceMargins).Formula = "=IF($B$6=""NO - (Using Current Pricing)"",(@R:R/@AC:AC)-1,(@R:R/@AD:AD)-1)"
-        MarginSheet.Sheets("Finance Margins").Range("U11:U" & LastRowFinanceMargins).Formula = "=IF($B$6=""NO - (Using Current Pricing)"",@AC:AC*(1-@T:T),@AD:AD*(1-@T:T))"
+        MarginSheet.Sheets("Finance Margins").Range("S11:S" & LastRowFinanceMargins).Formula = "=(@R:R/@AC:AC)-1"
+        MarginSheet.Sheets("Finance Margins").Range("U11:U" & LastRowFinanceMargins).Formula = "=@AC:AC*(1-@T:T)"
         MarginSheet.Sheets("Finance Margins").Range("V11:V" & LastRowFinanceMargins).Formula = "=(@U:U-@M:M)/@U:U"
         MarginSheet.Sheets("Finance Margins").Range("AB11:AB" & LastRowFinanceMargins).Formula = "=IFERROR((@AA:AA/@Z:Z)-1,"""")"
         MarginSheet.Sheets("Finance Margins").Range("AE11:AE" & LastRowFinanceMargins).Formula = "=IFERROR((@AD:AD/@AC:AC)-1,"""")"
@@ -156,7 +155,6 @@ Sub Margin_Sheet_v6()
         MarginSheet.Sheets("Finance Margins").Range("G3").Formula = "=(G1-G2)/G1"
         MarginSheet.Sheets("Finance Margins").Range("G4").Formula = "=G1*G3"
         MarginSheet.Sheets("Finance Margins").Range("B6").Validation.Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, Formula1:="NO - (Using Current Pricing), YES - (Using Future Pricing)"
-        MarginSheet.Sheets("Finance Margins").Range("B6") = "NO - (Using Current Pricing)"
         MarginSheet.Sheets("Finance Margins").Range("I1").Formula = "=COUNTIF(AO11:AO" & LastRowFinanceMargins & ",""<>No Increases"") & "" Products"""
         MarginSheet.Sheets("Finance Margins").Range("I2").Formula = "=COUNTIF(AQ11:AQ" & LastRowFinanceMargins & ",""*EOL*"")+COUNTIF(AQ11:AQ" & LastRowFinanceMargins & ",""*OBS*"") & "" Products"""
         MarginSheet.Sheets("Finance Margins").Range("I3").Formula = "=COUNTIF(H11:H" & LastRowFinanceMargins & ",""<0"") & "" Products"""
@@ -210,10 +208,10 @@ Sub Margin_Sheet_v6()
         MarginSheet.Sheets("Finance Margins").Range("G1:G4,I1:I4").VerticalAlignment = xlCenter
         MarginSheet.Sheets("Finance Margins").Range("A9:AT" & LastRowFinanceMargins).Borders.LineStyle = xlContinuous
         MarginSheet.Sheets("Finance Margins").Range("F1:I4").Borders.LineStyle = xlContinuous
-        MarginSheet.Sheets("Finance Margins").Range("A1:B6").Borders.LineStyle = xlContinuous
+        MarginSheet.Sheets("Finance Margins").Range("A1:B5").Borders.LineStyle = xlContinuous
         MarginSheet.Sheets("Finance Margins").Cells.Font.Name = "Arial"
         MarginSheet.Sheets("Finance Margins").Cells.Font.Size = "10"
-        MarginSheet.Sheets("Finance Margins").Range("A1:A6,F1:F4,A9:AT10,H1:H4").Font.Bold = True
+        MarginSheet.Sheets("Finance Margins").Range("A1:A5,F1:F4,A9:AT10,H1:H4").Font.Bold = True
         MarginSheet.Sheets("Finance Margins").Range("G11:G" & LastRowFinanceMargins).Font.Bold = True
         MarginSheet.Sheets("Finance Margins").Range("H11:H" & LastRowFinanceMargins).Font.Bold = True
         MarginSheet.Sheets("Finance Margins").Range("I11:I" & LastRowFinanceMargins).Font.Bold = True
@@ -226,7 +224,7 @@ Sub Margin_Sheet_v6()
         MarginSheet.Sheets("Finance Margins").Range("AN11:AN" & LastRowFinanceMargins).Font.Bold = True
         MarginSheet.Sheets("Finance Margins").Range("A10:AT10").Font.Underline = True
         ActiveWindow.DisplayGridlines = False
-        MarginSheet.Sheets("Finance Margins").Range("A10:AT10,A1:B6,F1:F4,H1:H4").Interior.Color = RGB(150, 194, 230)
+        MarginSheet.Sheets("Finance Margins").Range("A10:AT10,A1:B5,F1:F4,H1:H4").Interior.Color = RGB(150, 194, 230)
         MarginSheet.Sheets("Finance Margins").Range("A9:F9,G1:G4,I1:I4").Interior.Color = RGB(237, 237, 237)
         MarginSheet.Sheets("Finance Margins").Range("A11:F" & LastRowFinanceMargins).Interior.Color = RGB(237, 237, 237)
         MarginSheet.Sheets("Finance Margins").Range("G9:M9").Interior.Color = RGB(198, 224, 180)
@@ -249,7 +247,6 @@ Sub Margin_Sheet_v6()
         MarginSheet.Sheets("Finance Margins").Range("F11:F" & LastRowFinanceMargins).Interior.Color = RGB(255, 242, 204)
         MarginSheet.Sheets("Finance Margins").Range("Q11:Q" & LastRowFinanceMargins).Interior.Color = RGB(255, 242, 204)
         MarginSheet.Sheets("Finance Margins").Range("T11:T" & LastRowFinanceMargins).Interior.Color = RGB(255, 242, 204)
-        MarginSheet.Sheets("Finance Margins").Range("B6").Interior.Color = RGB(255, 242, 204)
         MarginSheet.Sheets("Finance Margins").Range("B11:B" & LastRowFinanceMargins).TextToColumns Destination:=Range("B11"), DataType:=xlDelimited, TextQualifier:=xlDoubleQuote, ConsecutiveDelimiter:=False, Tab:=True, Semicolon:=False, Comma:=False, Space:=False, Other:=False, FieldInfo:=Array(1, 1), TrailingMinusNumbers:=True
         
         'Specialised Logic
