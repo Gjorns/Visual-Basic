@@ -154,7 +154,6 @@ Sub Margin_Sheet_v6()
         MarginSheet.Sheets("Finance Margins").Range("G2").Formula = "=SUM(O11:O" & LastRowFinanceMargins & ")"
         MarginSheet.Sheets("Finance Margins").Range("G3").Formula = "=(G1-G2)/G1"
         MarginSheet.Sheets("Finance Margins").Range("G4").Formula = "=G1*G3"
-        MarginSheet.Sheets("Finance Margins").Range("B6").Validation.Add Type:=xlValidateList, AlertStyle:=xlValidAlertStop, Formula1:="NO - (Using Current Pricing), YES - (Using Future Pricing)"
         MarginSheet.Sheets("Finance Margins").Range("I1").Formula = "=COUNTIF(AO11:AO" & LastRowFinanceMargins & ",""<>No Increases"") & "" Products"""
         MarginSheet.Sheets("Finance Margins").Range("I2").Formula = "=COUNTIF(AQ11:AQ" & LastRowFinanceMargins & ",""*EOL*"")+COUNTIF(AQ11:AQ" & LastRowFinanceMargins & ",""*OBS*"") & "" Products"""
         MarginSheet.Sheets("Finance Margins").Range("I3").Formula = "=COUNTIF(H11:H" & LastRowFinanceMargins & ",""<0"") & "" Products"""
