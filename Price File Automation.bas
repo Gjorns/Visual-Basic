@@ -47,7 +47,7 @@ Sub Price_File_Automation_PrePP()
         ElseIf Pricefiletype = "SLP" Then
             Master.Sheets("Price File").Range("AV12:AW" & LastRowMaster).ClearContents
             Master.Sheets("Price File").Range("BW12:BX" & LastRowMaster).ClearContents
-            Master.Sheets("Price File").Range("BJ12:BM" & LastRowMaster).ClearContents
+            Master.Sheets("Price File").Range("BK12:BM" & LastRowMaster).ClearContents
             End If
         End If
     End If
