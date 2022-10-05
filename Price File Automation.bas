@@ -1,4 +1,3 @@
-' Updated 14.09.2022 by Andrei Polin
 Sub Price_File_Automation_PrePP()
     Application.DisplayAlerts = False
     Application.ScreenUpdating = False
@@ -44,7 +43,7 @@ Sub Price_File_Automation_PrePP()
             If Master.Sheets("Settings").Range("B9").Value <> "YES" Then
                 Master.Sheets("Price File").Range("AV12:AV" & LastRowMaster).Value = "X"
             End If
-            Master.Sheets("Price File").Range("BJ12:BM" & LastRowMaster).ClearContents
+            Master.Sheets("Price File").Range("BK12:BM" & LastRowMaster).ClearContents
         ElseIf Pricefiletype = "SLP" Then
             Master.Sheets("Price File").Range("AV12:AW" & LastRowMaster).ClearContents
             Master.Sheets("Price File").Range("BW12:BX" & LastRowMaster).ClearContents
