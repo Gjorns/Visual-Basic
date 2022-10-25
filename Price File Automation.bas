@@ -355,12 +355,16 @@ Sub Price_File_Automation_PrePP()
             Master.Sheets("Price File").Range("E12:E" & LastRowMaster).SpecialCells(xlCellTypeVisible).Formula = "=IFERROR(VLOOKUP(@A:A,'[Product Database.xlsb]Product File (Pyr1)'!$A:$AA,4,FALSE),""Incorrect WUK Code"")"
             Master.Sheets("Price File").Range("BG12:BG" & LastRowMaster).SpecialCells(xlCellTypeVisible).Formula = "=IFERROR(VLOOKUP(@A:A,'[Product Database.xlsb]Product File (Pyr1)'!$A:$AA,9,FALSE),""Incorrect WUK Code"")"
             Master.Sheets("Price File").Range("BH12:BH" & LastRowMaster).SpecialCells(xlCellTypeVisible).Formula = "=IFERROR(VLOOKUP(@A:A,'[Product Database.xlsb]Product File (Pyr1)'!$A:$AA,10,FALSE),""Incorrect WUK Code"")"
+            Master.Sheets("Price File").Range("BJ12:BJ" & LastRowMaster).SpecialCells(xlCellTypeVisible).Formula = "=IFERROR(VLOOKUP(@A:A,'[Product Database.xlsb]Product File (Pyr1)'!$A:$AA,3,FALSE),""Incorrect WUK Code"")"
             Master.Sheets("Price File").AutoFilter.ShowAllData
             Master.Sheets("Price File").Range("B12:E" & LastRowMaster).Copy
             Master.Sheets("Price File").Range("B12:E" & LastRowMaster).PasteSpecial Paste:=xlPasteValues
             Application.CutCopyMode = False
             Master.Sheets("Price File").Range("BG12:BH" & LastRowMaster).Copy
             Master.Sheets("Price File").Range("BG12:BH" & LastRowMaster).PasteSpecial Paste:=xlPasteValues
+            Application.CutCopyMode = False
+            Master.Sheets("Price File").Range("BJ12:BJ" & LastRowMaster).Copy
+            Master.Sheets("Price File").Range("BJ12:BJ" & LastRowMaster).PasteSpecial Paste:=xlPasteValues
             Application.CutCopyMode = False
             ProductDatabase.Close False
         End If
@@ -1516,6 +1520,29 @@ Sub Export_Terms()
     Master.Activate
     LastRowMaster = Master.Sheets("Price File").Range("A" & Rows.Count).End(xlUp).Row
     
+    Master.Sheets("Price File").Range("A11:BX" & LastRowMaster).AutoFilter Field:=48, Criteria1:="*rem*"
+    If Master.Sheets("Price File").AutoFilter.Range.Columns(1).SpecialCells(xlCellTypeVisible).Count > 1 Then
+        Master.Sheets.Add.Name = "REMOVALS"
+        Master.Sheets("Price File").Range("A11:E" & LastRowMaster).Copy
+        Master.Sheets("REMOVALS").Range("A1").PasteSpecial Paste:=xlPasteValues
+        Application.CutCopyMode = False
+        Master.Sheets("Price File").Range("AR11:AR" & LastRowMaster).Copy
+        Master.Sheets("REMOVALS").Range("F1").PasteSpecial Paste:=xlPasteValues
+        Application.CutCopyMode = False
+        Master.Sheets("REMOVALS").Columns.AutoFit
+        Master.Sheets("REMOVALS").Rows.AutoFit
+        Master.Sheets("Price File").AutoFilter.Range.Offset(1, 0).Rows.SpecialCells(xlCellTypeVisible).Delete (xlShiftUp)
+        If Master.Sheets("Price File").AutoFilterMode = True Then Master.Sheets("Price File").AutoFilterMode = False
+        Master.Sheets("REMOVALS").Copy
+        ActiveWorkbook.SaveAs "\\wukrls00fp001\RLS_Data\Departments\NACET\Price File Maintenance\Estimators\" & Estimator & "\Terms\" & FutureMonthNameDir & "\" & CurrentAccount & " " & AccountFullName & " " & FutureMonthName & " - Terms Removal.csv", FileFormat:=xlCSV
+        ActiveWorkbook.Close True
+        Master.Activate
+        Master.Sheets("REMOVALS").Delete
+        Master.Save
+    End If
+    LastRowMaster = Master.Sheets("Price File").Range("A" & Rows.Count).End(xlUp).Row
+    
+    
     Set ProductDatabase = Workbooks.Open("\\wukrls00fp001\RLS_Data\Departments\NACET\Price File Maintenance\Product Database\" & FutureMonthNameDir & "\Product Database.xlsb", ReadOnly:=True)
     ProductDatabase.Sheets(1).Columns("A:A").TextToColumns Destination:=Range("A1"), DataType:=xlDelimited, TextQualifier:=xlDoubleQuote, ConsecutiveDelimiter:=False, Tab:=True, Semicolon:=False, Comma:=False, Space:=False, Other:=False, FieldInfo:=Array(1, 1), TrailingMinusNumbers:=True
     Master.Sheets("Price File").Range("BG12:BG" & LastRowMaster).Formula = "=IFERROR(VLOOKUP(A12,'[product Database.xlsb]Product File (Pyr1)'!$A:$I,9,FALSE),""No Data"")"
@@ -2097,7 +2124,31 @@ Sub Export_CustomerVersion()
     FutureMonthNameDir = Format(DateSerial(Year(Date), Month(Date) + 1, 1), "mm") & " " & Format(DateSerial(Year(Date), Month(Date) + 1, 1), "mmmm")
     ActiveMonthName = Format(DateSerial(Year(Date), Month(Date), 1), "mmmm")
     FutureMonthName = Format(DateSerial(Year(Date), Month(Date) + 1, 1), "mmmm")
+    AccountFullName = Master.Sheets("Price File").Range("B1").Value
     Master.Activate
+    
+    LastRowMaster = Master.Sheets("Price File").Range("A" & Rows.Count).End(xlUp).Row
+    Master.Sheets("Price File").Range("A11:BX" & LastRowMaster).AutoFilter Field:=48, Criteria1:="*rem*"
+    If Master.Sheets("Price File").AutoFilter.Range.Columns(1).SpecialCells(xlCellTypeVisible).Count > 1 Then
+        Master.Sheets.Add.Name = "REMOVALS"
+        Master.Sheets("Price File").Range("A11:E" & LastRowMaster).Copy
+        Master.Sheets("REMOVALS").Range("A1").PasteSpecial Paste:=xlPasteValues
+        Application.CutCopyMode = False
+        Master.Sheets("Price File").Range("AR11:AR" & LastRowMaster).Copy
+        Master.Sheets("REMOVALS").Range("F1").PasteSpecial Paste:=xlPasteValues
+        Application.CutCopyMode = False
+        Master.Sheets("REMOVALS").Columns.AutoFit
+        Master.Sheets("REMOVALS").Rows.AutoFit
+        Master.Sheets("Price File").AutoFilter.Range.Offset(1, 0).Rows.SpecialCells(xlCellTypeVisible).Delete (xlShiftUp)
+        If Master.Sheets("Price File").AutoFilterMode = True Then Master.Sheets("Price File").AutoFilterMode = False
+        Master.Sheets("REMOVALS").Copy
+        ActiveWorkbook.SaveAs "\\wukrls00fp001\RLS_Data\Departments\NACET\Price File Maintenance\Estimators\" & Estimator & "\Terms\" & FutureMonthNameDir & "\" & CurrentAccount & " " & AccountFullName & " " & FutureMonthName & " - Terms Removal.csv", FileFormat:=xlCSV
+        ActiveWorkbook.Close True
+        Master.Activate
+        Master.Sheets("REMOVALS").Delete
+        Master.Save
+    End If
+    LastRowMaster = Master.Sheets("Price File").Range("A" & Rows.Count).End(xlUp).Row
 
     Master.Sheets.Add(After:=Sheets(Sheets.Count)).Name = "Customer Version"
     LastRowMaster = Master.Sheets("Price File").Range("A" & Rows.Count).End(xlUp).Row
