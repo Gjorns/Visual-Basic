@@ -1540,6 +1540,7 @@ Sub Export_Terms()
         Master.Sheets("REMOVALS").Delete
         Master.Save
     End If
+    Master.Sheets("Price File").AutoFilter.ShowAllData
     LastRowMaster = Master.Sheets("Price File").Range("A" & Rows.Count).End(xlUp).Row
     
     
@@ -2148,6 +2149,7 @@ Sub Export_CustomerVersion()
         Master.Sheets("REMOVALS").Delete
         Master.Save
     End If
+    Master.Sheets("Price File").AutoFilter.ShowAllData
     LastRowMaster = Master.Sheets("Price File").Range("A" & Rows.Count).End(xlUp).Row
 
     Master.Sheets.Add(After:=Sheets(Sheets.Count)).Name = "Customer Version"
