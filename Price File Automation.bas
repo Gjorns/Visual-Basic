@@ -268,15 +268,15 @@ Sub Price_File_Automation_PrePP()
             ActiveWorkbook.Sheets(1).Range("D1").Value = "WUK Product Code"
             ActiveWorkbook.Sheets(1).Range("E1").Value = "Product Comment"
             ActiveWorkbook.Sheets(1).Range("F1").Value = "Quantity"
-            ActiveWorkbook.Sheets(1).Range("G1").Value = "Selling Price Ã‚Â£"
+            ActiveWorkbook.Sheets(1).Range("G1").Value = "Selling Price Ãƒâ€šÃ‚Â£"
             ActiveWorkbook.Sheets(1).Range("H1").Value = "Discount 1 %"
             ActiveWorkbook.Sheets(1).Range("I1").Value = "Discount 2 %"
             ActiveWorkbook.Sheets(1).Range("J1").Value = "Trading Margin %"
             ActiveWorkbook.Sheets(1).Range("K1").Value = "Product Specific Customer Rebate %"
             ActiveWorkbook.Sheets(1).Range("L1").Value = "Supplier Contract"
             ActiveWorkbook.Sheets(1).Range("M1").Value = "Agreed Contract Support %"
-            ActiveWorkbook.Sheets(1).Range("N1").Value = "Agreed Contract Support Ã‚Â£"
-            ActiveWorkbook.Sheets(1).Range("O1").Value = "Agreed Net Price Ã‚Â£"
+            ActiveWorkbook.Sheets(1).Range("N1").Value = "Agreed Contract Support Ãƒâ€šÃ‚Â£"
+            ActiveWorkbook.Sheets(1).Range("O1").Value = "Agreed Net Price Ãƒâ€šÃ‚Â£"
             ActiveWorkbook.Sheets(1).Range("D2").Value = "1111111"
             ActiveWorkbook.Sheets(1).Range("D3").Value = "2222222"
             ActiveWorkbook.Sheets(1).Range("D4").Value = "3333333"
@@ -1540,7 +1540,7 @@ Sub Export_Terms()
         Master.Sheets("REMOVALS").Delete
         Master.Save
     End If
-    Master.Sheets("Price File").AutoFilter.ShowAllData
+    If Master.Sheets("Price File").AutoFilterMode = True Then Master.Sheets("Price File").AutoFilterMode = False
     LastRowMaster = Master.Sheets("Price File").Range("A" & Rows.Count).End(xlUp).Row
     
     
@@ -2149,7 +2149,7 @@ Sub Export_CustomerVersion()
         Master.Sheets("REMOVALS").Delete
         Master.Save
     End If
-    Master.Sheets("Price File").AutoFilter.ShowAllData
+    If Master.Sheets("Price File").AutoFilterMode = True Then Master.Sheets("Price File").AutoFilterMode = False
     LastRowMaster = Master.Sheets("Price File").Range("A" & Rows.Count).End(xlUp).Row
 
     Master.Sheets.Add(After:=Sheets(Sheets.Count)).Name = "Customer Version"
